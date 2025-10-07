@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Link Test</title>
+</head>
+<body>
+    <h2>Simple Link Test (No Bootstrap, No JavaScript)</h2>
+
+    <p><a href="/profile">Direct link to /profile</a></p>
+    <p><a href="/admin">Direct link to /admin</a></p>
+    <p><a href="/test-simple">Direct link to /test-simple</a></p>
+
+    <hr>
+
+    <p>Click the links above. They should navigate normally.</p>
+
+    <script>
+        console.log("Simple test page loaded");
+
+        document.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                console.log('Link clicked:', this.href);
+            });
+        });
+    </script>
+</body>
+</html>
