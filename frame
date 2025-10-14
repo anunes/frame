@@ -1,0 +1,88 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Frame CLI Tool
+ * Similar to Laravel's Artisan
+ */
+
+// Define base path
+define('BASE_PATH', __DIR__);
+
+// Load autoloader
+require_once BASE_PATH . '/vendor/autoload.php';
+
+// Load environment variables
+$dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
+$dotenv->load();
+
+// Load configuration
+require_once BASE_PATH . '/app/config/config.php';
+
+// Parse command line arguments
+$command = $argv[1] ?? null;
+$arguments = array_slice($argv, 2);
+
+// Available commands
+$commands = [
+    'make:controller' => 'app\\console\\MakeController',
+    'make:model' => 'app\\console\\MakeModel',
+    'make:view' => 'app\\console\\MakeView',
+    'make:migration' => 'app\\console\\MakeMigration',
+    'migrate' => 'app\\console\\Migrate',
+    'migrate:rollback' => 'app\\console\\MigrateRollback',
+    'cache:clear' => 'app\\console\\CacheClear',
+    'serve' => 'app\\console\\Serve',
+    'route:list' => 'app\\console\\RouteList',
+    'list' => 'app\\console\\ListCommands',
+];
+
+// Show help if no command provided
+if (!$command) {
+    showHelp();
+    exit(0);
+}
+
+// Execute command
+if (isset($commands[$command])) {
+    $commandClass = $commands[$command];
+
+    if (class_exists($commandClass)) {
+        $commandInstance = new $commandClass();
+        $commandInstance->handle($arguments);
+    } else {
+        echo "\033[31mError: Command class not found: {$commandClass}\033[0m\n";
+        exit(1);
+    }
+} else {
+    echo "\033[31mError: Command '{$command}' not found.\033[0m\n";
+    echo "\nRun 'php frame list' to see all available commands.\n";
+    exit(1);
+}
+
+/**
+ * Show help message
+ */
+function showHelp(): void
+{
+    echo "\033[32m";
+    echo "  ___                       \n";
+    echo " | __|_ _ __ _ _ __  ___    \n";
+    echo " | _| '_/ _` | '  \\/ -_)   \n";
+    echo " |_||_| \\__,_|_|_|_\\___|   \n";
+    echo "\033[0m\n";
+    echo "\033[33mFrame CLI Tool - v1.0.0\033[0m\n\n";
+    echo "Usage:\n";
+    echo "  php frame <command> [arguments]\n\n";
+    echo "Available Commands:\n";
+    echo "  \033[32mmake:controller\033[0m <name>     Create a new controller\n";
+    echo "  \033[32mmake:model\033[0m <name>          Create a new model\n";
+    echo "  \033[32mmake:view\033[0m <name>           Create a new view\n";
+    echo "  \033[32mmake:migration\033[0m <name>      Create a new migration\n";
+    echo "  \033[32mmigrate\033[0m                    Run database migrations\n";
+    echo "  \033[32mmigrate:rollback\033[0m           Rollback last migration\n";
+    echo "  \033[32mcache:clear\033[0m                Clear application cache (views, OPcache)\n";
+    echo "  \033[32mserve\033[0m [port]              Start development server\n";
+    echo "  \033[32mroute:list\033[0m                 List all registered routes\n";
+    echo "  \033[32mlist\033[0m                       List all commands\n\n";
+}
