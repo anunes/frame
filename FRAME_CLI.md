@@ -36,6 +36,7 @@ To list all supported commands:
 
 ```bash
 php frame list
+php frame -help
 ```
 
 Available commands:
@@ -53,6 +54,7 @@ Available commands:
 - `module:start`
 - `module:delete`
 - `list`
+- `help`, `-help`, `--help`, `-h`
 
 ## How To Use Each Command
 

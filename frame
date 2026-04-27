@@ -38,6 +38,10 @@ $commands = [
     'module:start' => 'app\\console\\ModuleStart',
     'module:delete' => 'app\\console\\ModuleDelete',
     'list' => 'app\\console\\ListCommands',
+    'help' => 'app\\console\\ListCommands',
+    '-help' => 'app\\console\\ListCommands',
+    '--help' => 'app\\console\\ListCommands',
+    '-h' => 'app\\console\\ListCommands',
 ];
 
 // Show help if no command provided

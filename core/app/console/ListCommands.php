@@ -48,6 +48,7 @@ class ListCommands
 
         echo "\033[33mOther:\033[0m\n";
         echo "  \033[32mlist\033[0m                       Show this help message\n\n";
+        echo "  \033[32mhelp\033[0m, \033[32m-help\033[0m, \033[32m--help\033[0m, \033[32m-h\033[0m Show this help message\n\n";
 
         echo "\033[36mExamples:\033[0m\n";
         echo "  php frame make:controller ProductController\n";
