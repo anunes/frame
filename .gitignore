@@ -1,0 +1,27 @@
+# Composer
+/vendor/
+composer.lock
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.claude
+
+# OS
+.DS_Store
+Thumbs.db
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.db
+/storage/
+
+# Libraries
+node_modules/
+vendor/
