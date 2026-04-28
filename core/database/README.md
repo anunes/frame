@@ -498,10 +498,15 @@ If you need to modify the schema:
 #### MySQL:
 ```bash
 mysql -u username -p
-CREATE DATABASE my_database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE my_database;
 SOURCE core/database/schema.sql;
 ```
+
+`schema.sql` now creates and selects the default `framework` database automatically before creating tables.
+
+If you want a different database name, either:
+
+- update the `CREATE DATABASE` and `USE` statements in `schema.sql`, or
+- create/select your preferred database manually and then run only the table statements.
 
 #### SQLite:
 ```bash
