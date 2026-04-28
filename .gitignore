@@ -1,7 +1,9 @@
 # Composer
 /vendor/
 composer.lock
-
+.git
+.gitignore
+.giattributes
 # Environment
 .env
 
