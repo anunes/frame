@@ -19,8 +19,7 @@ composer.lock
 Thumbs.db
 # Logs and databases
 *.log
-*.sql
-*.sqlite
+
 *.db
 /storage/
 
