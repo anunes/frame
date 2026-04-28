@@ -33,3 +33,9 @@ CREATE TABLE IF NOT EXISTS migrations (
     batch INT NOT NULL,
     migrated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO users (name, email, password, role, active, must_change_password)
+SELECT 'Admin', 'admin@admin.com', '$2y$12$FKjWnJsJsq0ms3nyJNAEKeVGkdyyxUX0Y65xRzz9Sv11RHJsjRD8.', 1, 1, 0
+WHERE NOT EXISTS (
+    SELECT 1 FROM users WHERE email = 'admin@admin.com'
+);

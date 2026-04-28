@@ -30,6 +30,16 @@ php frame module:delete employees --force
 php frame serve 8080
 ```
 
+## Initial Admin Account
+
+After importing `core/database/schema.sql` or `core/database/schema_sqlite.sql`, Frame creates a default administrator account:
+
+- Name: `Admin`
+- Email: `admin@admin.com`
+- Password: `admin`
+
+Change this password immediately after your first login.
+
 ## Command List
 
 To list all supported commands:

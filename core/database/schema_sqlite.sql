@@ -34,3 +34,6 @@ CREATE TABLE IF NOT EXISTS migrations (
     batch INTEGER NOT NULL,
     migrated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT OR IGNORE INTO users (name, email, password, role, active, must_change_password)
+VALUES ('Admin', 'admin@admin.com', '$2y$12$FKjWnJsJsq0ms3nyJNAEKeVGkdyyxUX0Y65xRzz9Sv11RHJsjRD8.', 1, 1, 0);

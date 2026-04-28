@@ -20,6 +20,7 @@ php core/database/setup_settings.php
 - Uncomment MySQL configuration in .env
 - Create the MySQL database if it doesn't exist
 - Create all tables from schema.sql
+- Create the default administrator account (`admin@admin.com` / `admin`)
 - Insert default settings
 
 ### For SQLite:
@@ -37,7 +38,16 @@ php core/database/setup_settings.php
 - Create the core/storage/database directory if needed
 - Create the SQLite database file
 - Create all tables from schema_sqlite.sql
+- Create the default administrator account (`admin@admin.com` / `admin`)
 - Insert default settings
+
+After setup finishes, you can log in with this initial administrator account:
+
+- Name: `Admin`
+- Email: `admin@admin.com`
+- Password: `admin`
+
+Change this password immediately after your first login.
 
 ---
 
@@ -192,6 +202,8 @@ php core/database/setup_settings.php
 ==================================================
   INSERTING DEFAULT DATA
 ==================================================
+→ Creating default administrator account...
+✓ Default administrator account ready
 → Inserting default contact info...
 ✓ Default contact info inserted
 → Inserting default copyright text...

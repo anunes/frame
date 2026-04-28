@@ -54,6 +54,14 @@ This is a production-ready build of the Frame application.
    - For MySQL: Import `core/database/schema.sql`
    - For SQLite: Import `core/database/schema_sqlite.sql`
 
+   Both schema files create an initial administrator account:
+
+   - Name: `Admin`
+   - Email: `admin@admin.com`
+   - Password: `admin`
+
+   Change this password immediately after your first login.
+
 9. Configure database settings using:
    ```bash
    php core/database/setup_settings.php
