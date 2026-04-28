@@ -35,18 +35,22 @@
 // BOOTSTRAP
 // ============================================
 
-require_once dirname(__FILE__, 2) . '/vendor/autoload.php';
+require_once dirname(__FILE__, 2) . '/app/helpers/cli_bootstrap.php';
+
+$projectRoot = frame_configure_cli_environment();
+
+require_once $projectRoot . '/vendor/autoload.php';
 
 // Load environment variables from .env file
 try {
-    $dotenv = Dotenv\Dotenv::createImmutable(dirname(__FILE__, 2));
+    $dotenv = Dotenv\Dotenv::createImmutable($projectRoot);
     $dotenv->safeLoad();
 } catch (Exception $e) {
     // Continue without .env
 }
 
 // Load application configuration
-require_once dirname(__FILE__, 3) . '/core/app/config/config.php';
+require_once $projectRoot . '/core/app/config/config.php';
 
 // ============================================
 // HELPER FUNCTIONS
@@ -55,21 +59,24 @@ require_once dirname(__FILE__, 3) . '/core/app/config/config.php';
 /**
  * Print success message with checkmark
  */
-function success($message) {
+function success($message)
+{
     echo "✓ " . $message . "\n";
 }
 
 /**
  * Print info message
  */
-function info($message) {
+function info($message)
+{
     echo "→ " . $message . "\n";
 }
 
 /**
  * Print error message and exit
  */
-function error($message, $exception = null) {
+function error($message, $exception = null)
+{
     echo "\n✗ ERROR: " . $message . "\n";
     if ($exception) {
         echo "  Details: " . $exception->getMessage() . "\n";
@@ -80,7 +87,8 @@ function error($message, $exception = null) {
 /**
  * Print section header
  */
-function section($title) {
+function section($title)
+{
     echo "\n" . str_repeat("=", 50) . "\n";
     echo "  " . strtoupper($title) . "\n";
     echo str_repeat("=", 50) . "\n";
@@ -95,8 +103,9 @@ function section($title) {
  * @param string $dbType The selected database type ('mysql', 'sqlite', etc.)
  * @return bool True on success, false on failure
  */
-function updateEnvFile($dbType) {
-    $envPath = dirname(__FILE__, 2) . '/.env';
+function updateEnvFile($dbType)
+{
+    $envPath = dirname(__FILE__, 3) . '/.env';
 
     // Check if .env file exists
     if (!file_exists($envPath)) {
@@ -212,7 +221,8 @@ function updateEnvFile($dbType) {
  *
  * @return string The detected timezone identifier
  */
-function detectTimezone(): string {
+function detectTimezone(): string
+{
     // Try PHP's built-in detection
     $timezone = @date_default_timezone_get();
 
@@ -250,8 +260,9 @@ function detectTimezone(): string {
  * @param string $timezone The timezone to set
  * @return bool True on success, false on failure
  */
-function updateTimezoneInEnv(string $timezone): bool {
-    $envPath = dirname(__FILE__, 2) . '/.env';
+function updateTimezoneInEnv(string $timezone): bool
+{
+    $envPath = dirname(__FILE__, 3) . '/.env';
 
     if (!file_exists($envPath)) {
         return false;
@@ -370,7 +381,6 @@ try {
         $pdo->exec('PRAGMA foreign_keys = ON');
 
         success("Connected to SQLite database: " . $dbPath);
-
     } else {
         // ============================================
         // MYSQL SETUP
@@ -581,7 +591,6 @@ try {
     echo "  2. Create your first admin user\n";
     echo "  3. Configure email settings in .env file\n";
     echo "\n";
-
 } catch (PDOException $e) {
     error("Database error occurred", $e);
 } catch (Exception $e) {

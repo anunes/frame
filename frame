@@ -6,8 +6,12 @@
  * Similar to Laravel's Artisan
  */
 
+require_once __DIR__ . '/core/app/helpers/cli_bootstrap.php';
+
+$projectRoot = frame_configure_cli_environment();
+
 // Define base path
-define('BASE_PATH', __DIR__);
+define('BASE_PATH', $projectRoot);
 
 // Load autoloader
 require_once BASE_PATH . '/vendor/autoload.php';
